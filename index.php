@@ -1,65 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Demo</title>
-	<style>
-		body{
-			place-items: center;
-			display: grid;
-			height: 100vh;
-			font-family: sans-serif;
-			margin: 0;
+<?php
+
+$people = [
+	[
+		"name" => "Adel",
+		"sport" => "Bodybuilding"
+	],[
+		"name" => "Adel",
+		"sport" => "basketball"
+	],[
+		"name" => "Abderazak",
+		"sport" => "Strongman"
+	],[
+		"name" => "Ronie",
+		"sport" => "Power building"
+	]
+];
+
+function filter($array, $callback){
+	$filtered_array = [];
+
+	foreach($array as $item){
+		if($callback($item)){
+			$filtered_array[] = $item;
 		}
-	</style>
-</head>
-<body>
+	}
 
-	<?php
+	return $filtered_array;
+}
 
-		$people = [
-			[
-				"name" => "Adel",
-				"sport" => "Bodybuilding"
-			],[
-				"name" => "Adel",
-				"sport" => "basketball"
-			],[
-				"name" => "Abderazak",
-				"sport" => "Strongman"
-			],[
-				"name" => "Ronie",
-				"sport" => "Power building"
-			]
-		];
-		
-		function filter($array, $callback){
-			$filtered_array = [];
+$filtered_people = filter($people, function($array){
+	return $array["name"] === "Adel";
+});
 
-			foreach($array as $item){
-				if($callback($item)){
-					$filtered_array[] = $item;
-				}
-			}
+// Now we separate the php logic from the view (the html portion)(also called the template), we name it:
+// index.view.php (can also be named: "index.html.php" or "index.template.php")
 
-			return $filtered_array;
-		}
+// If we have a file that exclusivly contains "php" we can omit the closing portion of the php tag
+// This is the file that will entiract with the database or calls an API, then I display the data in the
+// "view" file.
 
-		$filtered_people = filter($people, function($array){
-			return $array["name"] === "Adel";
-		});
-		// This function works the same way the the built-in function in PHP called "array_filter()"
-	?>
+// Now we include our view here at the bottom:
+require "index.view.php";
+// "require" is identical to "include" except upon failure it will also produce an Error exception.
 
-	<h1>Hellow I'm Nadir</h1>
-
-	<ul>
-		<?php foreach($filtered_people as $person ) : ?>
-			<li>
-				<?= $person["name"] ?> : <?= $person["sport"] ?>
-			</li>
-		<?php endforeach; ?>
-	</ul>
-</body>
-</html>
+// Now our view will have access to all the data that was defined in this file. For example here we have the
+// variable "$filtered_people" that we can use inside our view "index.view.php".
