@@ -8,7 +8,7 @@
 </head>
 <body>
 	<?php require "nav.view.php" ?>
-	<h1>Home Page</h1>
+	<h1>Contact Page</h1>
 
 </body>
 </html>
