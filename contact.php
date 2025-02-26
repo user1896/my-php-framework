@@ -1,3 +1,5 @@
 <?php
 
-require "contact.view.php";
+$title = 'Contact Us';
+
+require "views/contact.view.php";
