@@ -1,17 +1,10 @@
 <?php
 
+require "functions.php";
+
 $title = 'Home';
 
-
-function mydebug($var){
-	echo "<pre>";
-	var_dump($var);
-	echo "</pre>";
-
-	die();
-}
-
-// mydebug($_SERVER["REQUEST_URI"]);
+mydebug($_SERVER["REQUEST_URI"]);
 
 /*
 $_SERVER is a super global variable that contains information created in the server, it is an array,
