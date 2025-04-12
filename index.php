@@ -1,17 +1,22 @@
 <?php
 
-require "functions.php";
+require 'functions.php';
 
-$title = 'Home';
+$uri = $_SERVER["REQUEST_URI"];
 
-mydebug($_SERVER["REQUEST_URI"]);
+// if($uri == '/my-php-framework/'){
+if($uri == '/'){
+	require 'controllers/index.php';
+}
+else 
+// mydebug($uri);
+if ($uri == '/about') {
+	// echo 'inside';
+	require 'controllers/about.php';
+}
 
-/*
-$_SERVER is a super global variable that contains information created in the server, it is an array,
-and if we do "var_dump($_SERVER);" we can see all of its properties.
-for example: $_SERVER["REQUEST_URI"] returns which page we're curently in.
-*/
+if ($_SERVER["REQUEST_URI"] == '/rr') {
+	echo 'inside';
+}
 
-require "views/index.view.php";
-// A partial is a partial peace of HTML.
-
+echo 'hello thereee';
