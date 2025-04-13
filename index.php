@@ -4,9 +4,6 @@ require 'functions.php';
 
 $uri = parse_url( $_SERVER["REQUEST_URI"] )["path"];
 
-// We refactor the code by creating an array that associate every "url" with a corresponding "controller",
-// instead of using the "if else" statement.
-
 $routes = [
 	'/' => 'controllers/index.php',
 	'/about' => 'controllers/about.php',
@@ -14,8 +11,17 @@ $routes = [
 ];
 
 if(array_key_exists($uri, $routes)){
-	// The "array_key_exists()" function takes a key (which is our "$uri" variable) and checks if it exists in an associative
-	// array (which is "$routes")
-	// Now if($uri == '/') then we require 'controllers/index.php' which is $routes[$uri]:
 	require $routes[$uri];
+} else {
+	// Now what if the user enters a uri that we're not responding to.
+	// We use "response status codes", they are a way for us to respond to certain requests, and 404 is the response
+	// we give when the page is not found, for example when a successful response we give the code 200.
+
+	http_response_code(404);
+	echo 'Sorry, not found';
+	die(); // kill the execution.
+
+	// Now if the "$uri" doesn't exists we print 'Sorry, not found', then we terminate the program.
+	// And if we open the developer's tool and check the console we see the response:
+	// "the server responded with a status of 404"
 }
