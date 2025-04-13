@@ -10,14 +10,17 @@ $routes = [
 	'/contact' => 'controllers/contact.php',
 ];
 
-function abort() {
-	http_response_code(404);
+// Refactor "abort()" to handle any response status code:
+function abort($code = 404) { // Set the default value for the parameter as "404" if the user didn't specify anything.
+	http_response_code($code);
 
-	require 'views/404.php';
+	// we should have a safety mechanism here to check if the page "views/{$code}.php" exists
+	// but now we just assume it exists:
+	require "views/{$code}.php";
 
 	die();
 }
-// refactor the code to handle invalide urls inside a function called "abort()"
+
 if(array_key_exists($uri, $routes)){
 	require $routes[$uri];
 } else {
