@@ -10,13 +10,16 @@ $routes = [
 	'/contact' => 'controllers/contact.php',
 ];
 
-if(array_key_exists($uri, $routes)){
-	require $routes[$uri];
-} else {
+function abort() {
 	http_response_code(404);
-	
-	// create a proper 404 page:
+
 	require 'views/404.php';
 
 	die();
+}
+// refactor the code to handle invalide urls inside a function called "abort()"
+if(array_key_exists($uri, $routes)){
+	require $routes[$uri];
+} else {
+	abort();
 }
