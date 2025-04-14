@@ -4,37 +4,31 @@ require 'functions.php';
 
 require 'router.php';
 
-// Connect to our MySQL database
-// To do that we're gonna use "PDO" (PHP Data Objects)
+// refactor the code that "connects to a database and execute a query" into a "class".
 
-// initialise PDO by ceating a new instance of the PDO class
-// the constructor takes a string called "dsn" (Data Source Name).
-// which is a string that declares our connexion to the database.
-// it contains information like the "database name", the "port", the "host", the characterset (like utf8) ...
+class Database {
+	// We build up our "PDO" instance one time and then everytime we call query we reuse that same instance instead of
+	// creating a new PDO instance everytime, so this logic goes inside the "constructor"
+	private $connection;
 
-$dsn = "mysql:host=localhost;port=3306;user=root;password=lalaseadel44;dbname=myphpapp;charset=utf8mb4";
-$pdo = new PDO($dsn);
+	public function __construct() {
+		$dsn = "mysql:host=localhost;port=3306;user=root;password=lalaseadel44;dbname=myphpapp;charset=utf8mb4";
+		// We assing the PDO connection to the attribute "$connection" (we called it $pdo before refactoring to a class).
+		$this->connection = new PDO($dsn);
+	}
+	public function query($query) {
+		$statement = $this->connection->prepare($query);
+		$statement->execute();
 
-// We can also remove the "user" and "password" from $dsn and provide them as parameters in PDO's constructor:
-// $dsn = "mysql:host=localhost;port=3306;dbname=myphpapp;charset=utf8mb4";
-// $pdo = new PDO($dsn, 'root', 'lalaseadel44');
-// The first param is the "dsn", the second is the username (which is "root" here), and the third is the "password".
+		return $statement;
+	}
+}
 
-// We handle situations when PHP can't connect:
+// create an instance of the Database class:
+$db = new Database();
 
-// Prepare a new query
-$statement = $pdo->prepare("select * from posts");
-// $statement is a prepared query statement.
+$posts = $db->query("select * from posts")->fetchAll(PDO::FETCH_ASSOC);
 
-// Now we send our statement to mysql to get executed.
-$statement->execute();
-
-// Now we need to fetch the results:
-$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-// They are numbers of ways to fetch the results, and "PDO::FETCH_ASSOC" is one of them which will return the results
-// as an associative array.
-
-// We're done, now we can display the results in our website:
 foreach($posts as $post) {
 	echo "<li>$post[title]</li>"; // assuming the table "posts" in our database has a column called "title".
 }
