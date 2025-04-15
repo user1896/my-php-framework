@@ -4,7 +4,9 @@ require 'functions.php';
 require 'router.php';
 require 'Database.php';
 
-$db = new Database();
+$config = require('config.php');
+
+$db = new Database($config, 'root', 'lalaseadel44');
 
 $posts = $db->query("select * from posts")->fetchAll();
 
