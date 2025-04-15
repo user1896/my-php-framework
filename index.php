@@ -6,7 +6,7 @@ require 'Database.php';
 
 $config = require('config.php');
 
-$db = new Database($config, 'root', 'lalaseadel44');
+$db = new Database($config['database'], 'root', 'lalaseadel44');
 
 $posts = $db->query("select * from posts")->fetchAll();
 
