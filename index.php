@@ -10,15 +10,10 @@ $db = new Database($config['database'], 'root', 'lalaseadel44');
 
 $id = $_GET['id'];
 
-// Replace user inputs with a question mark to prevent SQL injections.
-$query = "select * from posts where id = ?";
-$posts = $db->query($query, [$id])->fetchAll();
-
-// Now if a user is malicious and he tries to inject a harmful sql query into the url, for example deleting my users:
-// ex: "https://website.com/?id=2; drop table users"
-// only id=2 will go into the question mark, and the rest of the sql injection won't be used,
-// and "id" can't be equal to "drop table users" so this url "?id=drop table users" is not valid.
-// This way we're protected.
+// Instead of using question marks we can use keys (also called "wild cards") to be more specific
+// and the code becomes more readable:
+$query = "select * from posts where id = :id";
+$posts = $db->query($query, ['id' => $id])->fetchAll();
 
 foreach($posts as $post) {
 	echo "<li>$post[title]</li>";

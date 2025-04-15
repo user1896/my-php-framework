@@ -12,8 +12,6 @@ class Database {
 	public function query($query, $params = []) {
 		$statement = $this->connection->prepare($query);
 
-		// Inside the execute() method is where we bind the sql query parameters.
-		// It's an array where the first value is the first parameter and so on.
 		$statement->execute($params);
 
 		return $statement;
