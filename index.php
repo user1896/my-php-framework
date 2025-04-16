@@ -10,11 +10,9 @@ $db = new Database($config['database'], 'root', 'lalaseadel44');
 
 $id = $_GET['id'];
 
-// Instead of using question marks we can use keys (also called "wild cards") to be more specific
-// and the code becomes more readable:
-$query = "select * from posts where id = :id";
+$query = "select * from notes where user_id = :id";
 $posts = $db->query($query, ['id' => $id])->fetchAll();
 
 foreach($posts as $post) {
-	echo "<li>$post[title]</li>";
+	echo "<li>$post[body]</li>";
 }
