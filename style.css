@@ -1,4 +1,4 @@
-body{
+body {
 	place-items: center;
 	display: grid;
 	height: 100vh;
@@ -7,6 +7,16 @@ body{
 	background-color: bisque;
 }
 
-.highlight-txt{
+.highlight-txt {
 	color: red;
+}
+
+.notesAnchor {
+	color: black;
+	text-decoration: none;
+}
+
+.notesAnchor:hover {
+	color: blue;
+	text-decoration: underline;
 }
