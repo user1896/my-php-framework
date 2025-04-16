@@ -12,14 +12,23 @@ $note = $db->query($query, [
 ])->fetch();
 
 // if $query is false that means the note doesn't exist.
-// Here we don't show a PHP warning in our website, instead we load the 404 page.
 if(!$note) {
 	abort();
 }
 
-// If the current user in not the one who wrote the note then he should not be able to access it.
-if($note['user_id'] != 1){ // let's suppose that user "1" is the current user (until we implement authentication).
-	abort(403); // the http status code "403" is called "forbiden" it is used when the user is not authorise to access data.
+// A special number is a number that has significance and special meaning that is not explicitly declared.
+// Below we have two special numbers: "1" and "403".
+// Now imagive 6 months from now you come back to this code and you forget what those numbers mean.
+// One solution is to extract them into variables.
+
+$currentUserId = 1;
+
+// When it comes to status codes (like 403) its better to create a new file (class) that handles all of them.
+// We call it Response.php
+
+// Only the ownner of the note can access it.
+if($note['user_id'] != $currentUserId){
+	abort(Response::FORBIDDEN);
 }
 
 require "views/note.view.php";
