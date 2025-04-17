@@ -14,8 +14,6 @@ $note = $db->query($query, [
 $currentUserId = 1;
 
 // Only the ownner of the note can access it.
-if($note['user_id'] != $currentUserId){
-	abort(Response::FORBIDDEN);
-}
+authorize( $note['user_id'] == $currentUserId );
 
 require "views/note.view.php";

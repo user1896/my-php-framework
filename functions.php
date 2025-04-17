@@ -7,4 +7,9 @@ function mydebug($var){
 
 	die();
 }
-
+// Rewite the logic that checks for user authentication
+function authorize($condition, $status = Response::FORBIDDEN) {
+	if(!$condition){
+		abort($status);
+	}
+}

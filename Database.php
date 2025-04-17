@@ -19,12 +19,8 @@ class Database {
 		return $this;
 	}
 
-	// We wrap PHP PDO's fetch() method inside our own fetch method(we call it find())
-	// This way we'll have control over fetch() and we can add more functionality to it.
-	// For example if it didn't fetch anything and the result is false, make it abort() to the 404 page.
-	// This is better than writting this logic outside of fetch() while it always needs it.
-	public function find() { // My own fetch method
-		return $this->statement->fetch(); // that calls PHP PDO's fetch() method.
+	public function find() {
+		return $this->statement->fetch();
 	}
 
 	public function findOrFail() {
