@@ -19,6 +19,10 @@ class Database {
 		return $this;
 	}
 
+	public function myFetchAll(){
+		return $this->statement->fetchAll();
+	}
+
 	public function find() {
 		return $this->statement->fetch();
 	}
