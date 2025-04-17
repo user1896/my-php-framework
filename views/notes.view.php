@@ -10,7 +10,7 @@
 	<?php endforeach; ?>
 </ul>
 <p>
-	<a href="#">Create Note</a>
+	<a href="/notes-create">Create Note</a>
 </p>
 
 </body>
