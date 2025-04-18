@@ -8,7 +8,19 @@
 	</div>
 
 	<div>
-		<textarea name="body" id="body" rows="5" cols="40" placeholder="Here's an idea for a note ..." required></textarea>
+		<!-- If the user posted something that was wrong (like over 250 characters for example) we don't want
+		 to delete all his comment, but keep it so he can update it. -->
+		<textarea
+			name="body"
+			id="body"
+			rows="5"
+			cols="40"
+			placeholder="Here's an idea for a note ..."
+			required
+		><?= $_POST['body'] ?? '' ?></textarea>
+		<!-- this is equivalent to: -->
+		<!-- isset($_POST['body']) ? $_POST['body'] : '' -->
+		<!-- if $_POST['body'] exists and not null than echo $_POST['body'] else echo an empty string '' -->
 	</div>
 
 	<!-- Give the user feedback about the errors that accured while trying to post into the database -->

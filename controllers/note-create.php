@@ -14,6 +14,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$errors['body'] = 'A body is required';
 	}
 
+	// preventing the user from posting something too big that is considered as junk:
+	if(strlen($_POST['body']) > 250) { // we don't want a body bigger than 250 words.
+		$errors['body'] = 'The body can not be more than 250 characters.';
+	}
+
 	// If there are no validation errors:
 	if( empty($errors) ) {
 		// then it is safe to post into the database:
