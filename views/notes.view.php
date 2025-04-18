@@ -5,7 +5,11 @@
 <ul>
 	<?php foreach($notes as $note) : ?>
 		<a href="/note?id=<?= $note['id'] ?>" class="notesAnchor">
-			<li><?= $note['body'] ?></li>
+			<!-- here istead of echo blindly what the user had typed into the form, we first pass it into a php
+			 build-in function called "htmlspecialchars" -->
+			<li><?= htmlspecialchars($note['body']) ?></li>
+			<!-- which will Convert special characters to HTML entities, so the <script> tag and the css class will not run,
+				instead they will be treated as strings -->
 		</a>
 	<?php endforeach; ?>
 </ul>

@@ -2,7 +2,9 @@
 <?php require "partials/nav.php" ?>
 <?php require "partials/main.php" ?>
 
-<p><?= $note['body'] ?></li></p>
+<p>
+	<?= htmlspecialchars($note['body']) ?>
+</p>
 <p>
 	<a href="/notes">Go back ...</a>
 </p>
