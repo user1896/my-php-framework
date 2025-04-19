@@ -8,4 +8,4 @@ $db = new Database($config['database'], 'root', 'lalaseadel44');
 $query = "select * from notes";
 $notes = $db->query($query)->myFetchAll();
 
-require "views/notes.view.php";
+require "views/notes/index.view.php";

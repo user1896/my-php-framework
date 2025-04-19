@@ -16,4 +16,4 @@ $currentUserId = 1;
 // Only the ownner of the note can access it.
 authorize( $note['user_id'] == $currentUserId );
 
-require "views/note.view.php";
+require "views/notes/show.view.php";

@@ -1,6 +1,6 @@
-<?php require "partials/head.php" ?>
-<?php require "partials/nav.php" ?>
-<?php require "partials/main.php" ?>
+<?php require "views/partials/head.php" ?>
+<?php require "views/partials/nav.php" ?>
+<?php require "views/partials/main.php" ?>
 
 <form method="POST" action="">
 	<div>
