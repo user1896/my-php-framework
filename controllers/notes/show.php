@@ -1,8 +1,7 @@
 <?php
 
-$title = "Note $_GET[id]";
+$config = require base_path('config.php');
 
-$config = require('config.php');
 $db = new Database($config['database'], 'root', 'lalaseadel44');
 
 $query = "select * from notes where id = :id";
@@ -16,4 +15,8 @@ $currentUserId = 1;
 // Only the ownner of the note can access it.
 authorize( $note['user_id'] == $currentUserId );
 
-require "views/notes/show.view.php";
+view('notes/show.view.php', [
+	'title' => "Note $_GET[id]",
+	'uri' => $uri,
+	'note' => $note
+]);

@@ -1,15 +1,14 @@
 <?php
 
-require 'Validator.php';
+require base_path('Validator.php');
 
-$title = 'Create a new note';
+$config = require base_path('config.php');
 
-$config = require('config.php');
 $db = new Database($config['database'], 'root', 'lalaseadel44');
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$errors = [];
+$errors = [];
 
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if(!Validator::string($_POST['body'], 1, 50)) {
 		$errors['body'] = 'Enters a body of 0 to 50 characters';
 	}
@@ -25,4 +24,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 
-require "views/notes/create.view.php";
+view('notes/create.view.php', [
+	'title' => 'Create a new note',
+	'uri' => $uri,
+	'errors' => $errors,
+]);
