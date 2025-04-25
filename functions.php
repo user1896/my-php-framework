@@ -36,4 +36,16 @@ function view($path, $attributes = []) {
 	// is the key and the value of the variable is the value associated with the key.
 	// for example we sent an array ['title' => 'Home','uri' => $uri], this will create two variables:
 	// $title = 'Home';	and $uri = $uri (value of $uri is passed from the router.php file).
+
+	// //////////////////////
+
+	// Why Making variables out of scope for a file we "require" is better than having all our variables accessable
+	// inside of it?
+	// From the begining, the first time I learned about the key-word "require" and learned that all my variables
+	// are now accessable inside the file that I required I knew that this aproche is flawed.
+	// Because I worked with components in React, and if you want the compponent to have an entry that changes how
+	// the component renders we send it as a parameter, you don't access global variables inside a component, so
+	// we can use our component anywhere.
+	// Now that we wrapped our "require" inside the function "view" basically we made our views behave the same as
+	// components.
 }
