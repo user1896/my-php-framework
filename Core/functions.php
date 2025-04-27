@@ -1,5 +1,7 @@
 <?php
 
+use Core\Response;
+
 function mydebug($var){
 	echo "<pre>";
 	var_dump($var);
