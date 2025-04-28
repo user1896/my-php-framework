@@ -10,6 +10,15 @@ function mydebug($var){
 	die();
 }
 
+function abort($code = 404) {
+	http_response_code($code);
+
+	// we should have a safety mechanism here to check if the page "views/{$code}.php" exists
+	require base_path("views/{$code}.php");
+
+	die();
+}
+
 function authorize($condition, $status = Response::FORBIDDEN) {
 	if(!$condition){
 		abort($status);

@@ -15,4 +15,21 @@ spl_autoload_register( function($className) {
  	require base_path($className . '.php');
 } );
 
-require base_path('Core/router.php');
+$router = new \Core\Router();
+
+$routes = require base_path('routes.php');
+// this will go to 'routes.php' and do: $router->get() and $router->delete(), so it will populate the protected
+// attribute '$router->routes' in the class 'Router'.
+
+// grab the current uri:
+$uri = parse_url( $_SERVER['REQUEST_URI'] )['path'];
+
+// grab the method:
+$method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
+// First check if $_POST['_method'] exists (it's set and not null), if it does it means it's a special request
+// not supported by <form>, like DELETE or PUT, so use it, otherwise use $_SERVER['REQUEST_METHOD'].
+
+// route the current uri to wherever it needs to go:
+$router->route($uri, $method);
+
+// Extend our router class to support different request types
