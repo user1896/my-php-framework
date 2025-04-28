@@ -16,6 +16,3 @@ spl_autoload_register( function($className) {
 } );
 
 require base_path('Core/router.php');
-
-// Namespacing
-// In our folder 'Core' we want to create namespacing for each of the classes.

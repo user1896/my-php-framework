@@ -3,7 +3,6 @@
 use Core\Database;
 
 $config = require base_path('config.php');
-
 $db = new Database($config['database'], 'root', 'lalaseadel44');
 
 $query = "select * from notes";
