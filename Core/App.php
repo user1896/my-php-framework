@@ -11,6 +11,14 @@ class App {
 
 	public static function container() {
 		return static::$container;
+		// with the "$" it's the attribute "$container", and without the "$" but with "()" it's the method container()
 	}
-	// I have access to App::container() From anywhere in the project.
+
+	public static function bind($key, $resolver) {
+		static::container()->bind($key, $resolver);
+	}
+	
+	public static function resolve($key) {
+		return static::container()->resolve($key);
+	}
 }
