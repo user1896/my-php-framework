@@ -1,9 +1,13 @@
 <?php
 
+use Core\App;
 use Core\Database;
 
-$config = require base_path('config.php');
-$db = new Database($config['database'], 'root', 'lalaseadel44');
+// App::container() will return an object of type container.
+// We have binded the key 'Core\Database' to intiating a Database object, the method resolve() will return it.
+$db = App::container()->resolve(Database::class);
+// className::class == a string path to the full namespace path to the class
+// so Core\Database::class == 'Core\Database'
 
 $currentUserId = 1;
 

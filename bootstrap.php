@@ -2,6 +2,7 @@
 
 // A playground to interact with the Container.
 
+use Core\App;
 use Core\Container;
 use Core\Database;
 
@@ -13,4 +14,4 @@ $container->bind('Core\Database', function() {
 	return new Database($config['database'], 'root', 'lalaseadel44');
 });
 
-$db = $container->resolve('Core\Databaseh');
+App::setContainer($container);
