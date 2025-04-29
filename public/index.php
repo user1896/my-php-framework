@@ -28,8 +28,9 @@ $uri = parse_url( $_SERVER['REQUEST_URI'] )['path'];
 $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 // First check if $_POST['_method'] exists (it's set and not null), if it does it means it's a special request
 // not supported by <form>, like DELETE or PUT, so use it, otherwise use $_SERVER['REQUEST_METHOD'].
+// (because for special requests like DELETE we create a hidden input with the name="_method")
 
 // route the current uri to wherever it needs to go:
 $router->route($uri, $method);
 
-// separate the logic of deleting a note and showing a note by adding a route to listen to a delete request
+// ...

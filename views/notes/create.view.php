@@ -2,7 +2,7 @@
 <?php require base_path('views/partials/nav.php') ?>
 <?php require base_path('views/partials/main.php') ?>
 
-<form method="POST" action="">
+<form method="POST" action="/notes">
 	<div>
 		<label for="body">note body</label>
 	</div>
