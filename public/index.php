@@ -32,4 +32,4 @@ $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 // route the current uri to wherever it needs to go:
 $router->route($uri, $method);
 
-// Extend our router class to support different request types
+// separate the logic of deleting a note and showing a note by adding a route to listen to a delete request
