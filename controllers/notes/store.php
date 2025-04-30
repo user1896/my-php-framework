@@ -22,7 +22,7 @@ if( !empty($errors) ) {
 	]);
 }
 
-// If we reach this point then it's same to post.
+// If we reach this point then it's save to post.
 $db->query('INSERT INTO notes(body, user_id) VALUES(:body, :user_id)', [
 	'body' => $_POST['body'],
 	'user_id' => 1

@@ -2,6 +2,7 @@
 
 namespace Core;
 
+// The purpose of this class is to make the container available everywhere in the project
 class App {
 	protected static $container;
 

@@ -34,5 +34,3 @@ $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
 // route the current uri to wherever it needs to go:
 $router->route($uri, $method);
-
-// Build a service container

@@ -9,9 +9,10 @@
 		</a>
 	<?php endforeach; ?>
 </ul>
-<p>
-	<a href="/notes-create">Create Note</a>
-</p>
+
+<button>
+	<a href="/notes/create">Create a new note</a>
+</button>
 
 </body>
 </html>
