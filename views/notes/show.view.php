@@ -7,7 +7,7 @@
 </p>
 
 <button>
-	<a href="/note/edit?id=<?= $note['id'] ?>">Edit</a>
+	<a href="/note-edit?id=<?= $note['id'] ?>">Edit</a>
 </button>
 
 <!-- "show.view.php" is not the route, it's just an end-point, the route that brought us here is "note" -->

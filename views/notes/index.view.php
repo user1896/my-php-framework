@@ -11,7 +11,7 @@
 </ul>
 
 <button>
-	<a href="/notes/create">Create a new note</a>
+	<a href="/notes-create">Create a new note</a>
 </button>
 
 </body>
