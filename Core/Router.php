@@ -2,6 +2,10 @@
 
 namespace Core;
 
+use \Core\Middleware\Guest;
+use \Core\Middleware\Auth;
+use \Core\Middleware\Middleware;
+
 class Router {
 	protected $routes = [];
 
@@ -52,15 +56,11 @@ class Router {
 				// delete a note, so we need to know both the uri and the method.
 
 				// applay the middleware
-
-				// if the user is a guest
-				if($route['middleware'] == 'guest') {
-					(new \Core\Middleware\Guest)->handle();
-				}
-
-				// The notes are members only section in the website, only 'auth' users should be able to access them.
-				if($route['middleware'] == 'auth') {
-					(new \Core\Middleware\Auth)->handle();
+				if($route['middleware']) { // sometimes $route['middleware'] is null, so we need to check before using it.
+					$middleware = Middleware::MAP[$route['middleware']];
+					// for ex: if $route['middleware'] == 'auth' then Map['auth'] will return the class Auth.
+	
+					(new $middleware)->handle();
 				}
 
 				return require base_path($route['controller']);
