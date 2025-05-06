@@ -16,7 +16,6 @@ authorize( $note['user_id'] == $currentUserId );
 
 view('notes/edit.view.php', [
 	'title' => 'Edit Note',
-	'uri' => $uri,
 	'errors' => [],
 	'note' => $note
 ]);

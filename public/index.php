@@ -1,5 +1,8 @@
 <?php
 
+// start a session
+session_start();
+
 const BASE_PATH = __DIR__ . '/../'; // BASE_PATH will point to an absolute path to the root of the project.
 
 require BASE_PATH . 'Core/functions.php';

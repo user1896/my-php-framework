@@ -17,7 +17,6 @@ if( !empty($errors) ) {
 	// then we display the errors in 'create.view.php'
 	return view('notes/create.view.php', [ // we return it so we don't execute the rest of the code if there're errors
 		'title' => 'Create a new note',
-		'uri' => $uri,
 		'errors' => $errors,
 	]);
 }

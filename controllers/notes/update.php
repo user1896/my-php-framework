@@ -29,7 +29,6 @@ if( !empty($errors) ) {
 	// then we display the errors in 'edit.view.php'
 	return view('notes/edit.view.php', [ // we return it so we don't execute the rest of the code if there're errors
 		'title' => 'Edit Note',
-		'uri' => $uri,
 		'errors' => $errors,
 		'note' => $note
 	]);

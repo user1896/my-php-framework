@@ -16,3 +16,6 @@ $router->post('/notes', 'controllers/notes/store.php');
 // By convention: if you wanna add a new note, than make a POST request to '/notes'
 // and the controller is 'store.php'.
 // the route '/notes-create' only handle the view of creating a note.
+
+$router->get('/register', 'controllers/registration/create.php');
+$router->post('/register', 'controllers/registration/store.php');

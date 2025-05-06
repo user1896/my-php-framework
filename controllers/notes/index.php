@@ -10,6 +10,5 @@ $notes = $db->query($query)->myFetchAll();
 
 view('notes/index.view.php', [
 	'title' => 'Notes',
-	'uri' => $uri,
 	'notes' => $notes
 ]);

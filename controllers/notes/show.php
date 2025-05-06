@@ -16,6 +16,5 @@ authorize( $note['user_id'] == $currentUserId );
 
 view('notes/show.view.php', [
 	'title' => "Note $_GET[id]",
-	'uri' => $uri,
 	'note' => $note
 ]);
