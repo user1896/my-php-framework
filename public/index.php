@@ -20,7 +20,7 @@ spl_autoload_register( function($className) {
 
 require base_path('bootstrap.php');
 
-$router = new \Core\Routerr();
+$router = new \Core\Router();
 
 $routes = require base_path('routes.php');
 // this will go to 'routes.php' and do: $router->get() and $router->delete(), so it will populate the protected

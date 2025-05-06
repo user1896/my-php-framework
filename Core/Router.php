@@ -2,7 +2,7 @@
 
 namespace Core;
 
-class Routerr {
+class Router {
 	protected $routes = [];
 
 	public function add($method, $uri, $controller) {
@@ -55,22 +55,12 @@ class Routerr {
 
 				// if the user is a guest
 				if($route['middleware'] == 'guest') {
-
-					if($_SESSION['user'] ?? false) {
-						// if a session exists that means that the user has loged in already, and he should not have access
-						// to pages like "login" or "register" anymore, we redirect him to the home page:
-						header('location: /');
-						exit();
-					}
+					(new \Core\Middleware\Guest)->handle();
 				}
 
 				// The notes are members only section in the website, only 'auth' users should be able to access them.
 				if($route['middleware'] == 'auth') {
-					if(! $_SESSION['user'] ?? false){
-						// when there is no session, it means no user is loged in, so redirect to the home page.
-						header('location: /');
-						exit();
-					}
+					(new \Core\Middleware\Auth)->handle();
 				}
 
 				return require base_path($route['controller']);
