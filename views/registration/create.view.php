@@ -22,8 +22,8 @@
 
 		<!-- display password error -->
 		<div>
-			<?php if(isset($errors['email'])) : ?> <!-- if the error exists -->
-				<p class="highlight-txt"><?= $errors['email'] ?></p> <!-- then display the error -->
+			<?php if(isset($errors['password'])) : ?> <!-- if the error exists -->
+				<p class="highlight-txt"><?= $errors['password'] ?></p> <!-- then display the error -->
 			<?php endif ?>
 		</div>
 
