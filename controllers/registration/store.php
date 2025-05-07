@@ -42,7 +42,7 @@ if($user) {
 	// If it doesn't exist, save it to the database, then log the use in, and redirect.
 	$db->query('INSERT INTO users(email, password) VALUES(:email, :password)', [
 		'email' => $email,
-		'password' => $password // change this to a hashed password before you insert it.
+		'password' => password_hash($password, PASSWORD_BCRYPT)
 	]);
 }
 
