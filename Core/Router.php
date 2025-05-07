@@ -56,12 +56,7 @@ class Router {
 				// delete a note, so we need to know both the uri and the method.
 
 				// applay the middleware
-				if($route['middleware']) { // sometimes $route['middleware'] is null, so we need to check before using it.
-					$middleware = Middleware::MAP[$route['middleware']];
-					// for ex: if $route['middleware'] == 'auth' then Map['auth'] will return the class Auth.
-	
-					(new $middleware)->handle();
-				}
+				Middleware::resolve($route['middleware']);
 
 				return require base_path($route['controller']);
 			}
