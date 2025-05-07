@@ -34,9 +34,9 @@ $user = $db->query('select * from users where email = :email', [
 	'email' => $email
 ])->find();
 
-// If yes, then redirect them to a login page.
+// If yes, then redirect them to the login page.
 if($user) {
-	header('location: /');
+	header('location: /login');
 	exit();
 } else {
 	// If it doesn't exist, save it to the database, then log the use in, and redirect.
@@ -47,9 +47,9 @@ if($user) {
 }
 
 // Mark that the user has loged in, use sessions.
-$_SESSION['user'] = [
+login([
 	'email' => $email
-];
+]);
 
 // redirect
 header('location: /');

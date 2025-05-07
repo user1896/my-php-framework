@@ -60,3 +60,9 @@ function view($path, $attributes = []) {
 	// Now that we wrapped our "require" inside the function "view" basically we made our views behave the same as
 	// components.
 }
+
+function login($user) {
+	$_SESSION['user'] = [
+		'email' => $user['email']
+	];
+}

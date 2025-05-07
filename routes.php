@@ -22,6 +22,5 @@ $router->post('/notes', 'controllers/notes/store.php');
 $router->get('/register', 'controllers/registration/create.php')->only('guest');
 $router->post('/register', 'controllers/registration/store.php');
 
-// If we're already signed in we need some kined of protection that restricts us from accessing certin pages,
-// like we can't go the registration page again, we're already signed in
-// Also if we're not signed in we can't create a new note.
+$router->get('/login', 'controllers/sessions/create.php')->only('guest');
+$router->post('/sessions', 'controllers/sessions/store.php');
