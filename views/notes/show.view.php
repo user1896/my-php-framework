@@ -21,6 +21,8 @@
 	<!-- Forms don't natively support submitting a DELETE request or a PUT request, it supports only GET and POST -->
 	<!-- So we need someway to suggest to our app that this is a DELETE request method -->
 	<!-- we use a hidden input with the name="_method" and the value is set to the request we want -->
+	<!-- then in public/index.php when we set the route, we check if $_POST['_method'] is set, which means a -->
+	<!-- special method, or $_SERVER['REQUEST_METHOD'] which means a regular GET or POST method -->
 	<input type="hidden" name="_method" value="DELETE" />
 	
 	<input type="hidden" name="id" value="<?= $note['id'] ?>"/>

@@ -24,7 +24,7 @@ if(!Validator::string($password)) {
 // If there are validation errors:
 if( !empty($errors) ) {
 	// then we display the errors in 'create.view.php'
-	return view('sessions/create.view.php', [ // we return it so we don't execute the rest of the code if there're errors
+	return view('session/create.view.php', [ // we return it so we don't execute the rest of the code if there're errors
 		'title' => 'Login',
 		'errors' => $errors,
 	]);
@@ -58,7 +58,7 @@ if($user) {
 // If we reach this point, it means one of two things:
 // either We didn't find a user, or the password validation failed
 // In both cases we reload the login view, and send an error.
-return view('sessions/create.view.php', [
+return view('session/create.view.php', [
 	'title' => 'Login',
 	'errors' => [
 		'password' => 'No matching account found for that email address and password'

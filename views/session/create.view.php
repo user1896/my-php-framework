@@ -6,7 +6,7 @@
 	<p>
 		Login big boy
 	</p>
-	<form action="sessions" method="POST">
+	<form action="session" method="POST">
 		<label for="email">Email address</label>
 		<input id="email" name="email" type="email" autocomplete="email" placeholder="Email Address" required>
 
