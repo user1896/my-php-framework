@@ -37,7 +37,7 @@ $user = $db->query('select * from users where email = :email', [
 	'email' => $email
 ])->find();
 
-// If a user is found: then we reload the login view, and send an error.
+// If a user is found: then we check his password.
 if($user) {
 	// We check if the password provided matches what we have in the database:
 	// our password in the database is hashed, so we use the function password_verify() provided by PHP to verify
@@ -53,7 +53,6 @@ if($user) {
 		exit();
 	}
 }
-
 
 // If we reach this point, it means one of two things:
 // either We didn't find a user, or the password validation failed
