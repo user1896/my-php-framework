@@ -13,32 +13,28 @@ $password = $_POST['password'];
 
 $form = new LoginForm();
 
-// If there are validation errors:
+// If the form validated successfuly
 if(! $form->validate($email, $password)) {
-	// then we display the errors in 'create.view.php'
-	return view('session/create.view.php', [ // we return it so we don't execute the rest of the code if there're errors
-		'title' => 'Login',
-		'errors' => $form->errors(),
-	]);
+	// Then continue to authenticate the user
+
+	// If the user authenticated successfuly:
+	if((new Authenticator)->attempt($email, $password)) {
+		// then redirect them to the home page.
+		redirect('/');
+	}
+	
+	// If the authentication failed then prepare an error message:
+	$form->error('email', 'No matching account found for that email address and password');
 }
 
-// Match the credentials.
+// At this point either the form validation or the authentication have failed.
 
-$auth = new Authenticator();
-
-// If the user authenticated successfuly:
-if($auth->attempt($email, $password)) {
-	// then redirect them to the home page.
-	redirect('/');
-} else {
-	// We reload the login view, and send an error.
-	return view('session/create.view.php', [
-		'title' => 'Login',
-		'errors' => [
-			'password' => 'No matching account found for that email address and password'
-		],
-	]);
-}
+// We reload the login view, and send the error.
+return view('session/create.view.php', [
+	// we return it so we don't execute the rest of the code if there're errors
+	'title' => 'Login',
+	'errors' => $form->errors(),
+]);
 
 // I refactored the functions login() and logout() into the class Authenticator
 
@@ -47,3 +43,5 @@ if($auth->attempt($email, $password)) {
 // header('location: /');
 // exit();
 // inside the file functions.php
+
+//  

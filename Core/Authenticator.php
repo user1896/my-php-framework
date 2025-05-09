@@ -4,7 +4,9 @@ namespace Core;
 
 class Authenticator {
 	public function attempt($email, $password) {
-		// attempt to log the user in:
+		// attempt to log the user in, by checking if the credentials match.
+
+		// first we check if the email exist:
 		$user = App::resolve(Database::class)->query('select * from users where email = :email', [
 			'email' => $email
 		])->find();
