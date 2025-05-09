@@ -12,7 +12,7 @@ class LoginForm {
 			$this->errors['email'] = 'Invalid Email address';
 		}
 
-		if(!Validator::string($password)) {
+		if(!Validator::string($password, 4, 10)) {
 			$this->errors['password'] = 'Invalid password';
 		}
 

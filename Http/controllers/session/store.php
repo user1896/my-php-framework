@@ -1,7 +1,6 @@
 <?php
 
-use Core\Database;
-use Core\App;
+use Core\Authenticator;
 use Http\Forms\LoginForm;
 
 $email = $_POST['email'];
@@ -23,36 +22,28 @@ if(! $form->validate($email, $password)) {
 	]);
 }
 
-$db = App::resolve(Database::class);
-
 // Match the credentials.
-$user = $db->query('select * from users where email = :email', [
-	'email' => $email
-])->find();
 
-// If a user is found: then we check his password.
-if($user) {
-	// We check if the password provided matches what we have in the database:
-	// our password in the database is hashed, so we use the function password_verify() provided by PHP to verify
-	// if a hashed password matches what we have.
-	if(password_verify($password, $user['password'])){
-		// If the password is correct, then log them in using sessions.
-		login([
-			'email' => $email
-		]);
-	
-		// then redirect them to the home page.
-		header('location: /');
-		exit();
-	}
+$auth = new Authenticator();
+
+// If the user authenticated successfuly:
+if($auth->attempt($email, $password)) {
+	// then redirect them to the home page.
+	redirect('/');
+} else {
+	// We reload the login view, and send an error.
+	return view('session/create.view.php', [
+		'title' => 'Login',
+		'errors' => [
+			'password' => 'No matching account found for that email address and password'
+		],
+	]);
 }
 
-// If we reach this point, it means one of two things:
-// either We didn't find a user, or the password validation failed
-// In both cases we reload the login view, and send an error.
-return view('session/create.view.php', [
-	'title' => 'Login',
-	'errors' => [
-		'password' => 'No matching account found for that email address and password'
-	],
-]);
+// I refactored the functions login() and logout() into the class Authenticator
+
+// I refactored the code:
+// // redirect
+// header('location: /');
+// exit();
+// inside the file functions.php
