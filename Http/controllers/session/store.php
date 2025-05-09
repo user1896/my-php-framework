@@ -1,32 +1,25 @@
 <?php
 
 use Core\Database;
-use Core\Validator;
 use Core\App;
+use Http\Forms\LoginForm;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
 // Log in the user if the credentials match.
-// to log in it means to add the user's key to the session.
+// to log in it means to add the user's key (email) to the session.
 
 // Valiadte the forms' inputs.
-$errors = [];
 
-if(!Validator::email($email)) {
-	$errors['email'] = 'Invalid Email address';
-}
-
-if(!Validator::string($password)) {
-	$errors['password'] = 'Invalid password';
-}
+$form = new LoginForm();
 
 // If there are validation errors:
-if( !empty($errors) ) {
+if(! $form->validate($email, $password)) {
 	// then we display the errors in 'create.view.php'
 	return view('session/create.view.php', [ // we return it so we don't execute the rest of the code if there're errors
 		'title' => 'Login',
-		'errors' => $errors,
+		'errors' => $form->errors(),
 	]);
 }
 
