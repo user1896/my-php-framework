@@ -1,6 +1,8 @@
 <?php
 
+use Core\Session;
+
 view('session/create.view.php', [
 	'title' => 'Login',
-	'errors' => $_SESSION['_flush']['errors'] ?? []
+	'errors' => Session::get('errors'),
 ]);
