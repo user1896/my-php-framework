@@ -1,6 +1,7 @@
 <?php
 
 use Core\Authenticator;
+use Core\Session;
 use Http\Forms\LoginForm;
 
 $email = $_POST['email'];
@@ -62,7 +63,7 @@ if($form->validate($email, $password)) {
 
 // In conclusion PRG pattern is: after a "Post", always "Redirect" to a "Get" to avoid the resubmission of data.
 
-$_SESSION['_flush']['errors'] = $form->errors();
+Session::flush('errors', $form->errors());
 
 // The first step to implement the PRG pattern is instead of loading an HTML view file we redirect to the loading
 // page using the function redirect() witch takes us there using a GET request:

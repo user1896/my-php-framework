@@ -1,6 +1,9 @@
 <?php
 
 // start a session
+
+use Core\Session;
+
 session_start();
 
 const BASE_PATH = __DIR__ . '/../'; // BASE_PATH will point to an absolute path to the root of the project.
@@ -39,4 +42,4 @@ $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 $router->route($uri, $method);
 
 // Flush the $_SESSION's key that holds the errors:
-unset($_SESSION['_flush']);
+Session::unflush();
