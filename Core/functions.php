@@ -1,6 +1,7 @@
 <?php
 
 use Core\Response;
+use Core\Session;
 
 function mydebug($var){
 	echo "<pre>";
@@ -64,4 +65,9 @@ function view($path, $attributes = []) {
 function redirect($path) {
 	header("location: {$path}");
 	exit();
+}
+
+// it's a commun convention to provide old data with this function, Laravel works this way.
+function old($key, $default = '') {
+	return Session::get('old')[$key] ?? $default;
 }

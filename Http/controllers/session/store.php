@@ -65,6 +65,13 @@ if($form->validate($email, $password)) {
 
 Session::flush('errors', $form->errors());
 
+// Remember the email to populate the input if the user failed the process of form validation or authentication.
+// the user should always re-enter the password so we don't remember it.
+// the convention name to remmeber the old form data is to call it "old".
+Session::flush('old', [
+	'email' => $email,
+]);
+
 // The first step to implement the PRG pattern is instead of loading an HTML view file we redirect to the loading
 // page using the function redirect() witch takes us there using a GET request:
 return redirect('/login');
