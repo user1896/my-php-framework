@@ -63,12 +63,12 @@ if($form->validate($email, $password)) {
 
 // In conclusion PRG pattern is: after a "Post", always "Redirect" to a "Get" to avoid the resubmission of data.
 
-Session::flush('errors', $form->errors());
+Session::flash('errors', $form->errors());
 
 // Remember the email to populate the input if the user failed the process of form validation or authentication.
 // the user should always re-enter the password so we don't remember it.
 // the convention name to remmeber the old form data is to call it "old".
-Session::flush('old', [
+Session::flash('old', [
 	'email' => $email,
 ]);
 
@@ -89,7 +89,8 @@ return redirect('/login');
 // that's how sessions work, they hold data in a cookie, so the page 'login' will always have this error.
 
 // Before we flush our $_SESSION's key that holds the index to the errors, we make sure to give it a very explicit
-// name, so it doesn't interfer with other $_SESSION's keys in the future, ex: "$_SESSION['_flush']['errors']"
+// name, so it doesn't interfer with other $_SESSION's keys in the future, ex: "$_SESSION['_flash']['errors']"
+// "flash" means it lives for a short amount of time.
 
 // Where We flush the SESSION's key:
 // The place to flush the $_SESSION's key is at the end of the file "public/index.php".

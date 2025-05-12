@@ -14,25 +14,30 @@ class Session {
 	}
 
 	public static function get($key, $default = null) {
-		// First we look if the key is an index to a value that we want to flush.
+		// First we look if the key is an index to a value that we want to flash.
 		// otherwise fallback to looking at the key in the top level of $_SESSION..
 		// otherwise default value.
-		return $_SESSION['_flush'][$key] ?? $_SESSION[$key] ?? $default;
+		return $_SESSION['_flash'][$key] ?? $_SESSION[$key] ?? $default;
 	}
 
-	public static function flush($key, $value) {
-		// The "flush()" method puts something into the session, but marks it as "_flush".
-		// so things add to the session with flush() should only live for a single request.
-		$_SESSION['_flush'][$key] = $value;
+	public static function flash($key, $value) {
+		// The "flash()" method puts something into the session that will live for a short amount of time
+		// , we mark it as "_flash".
+		// so things added to the session with flash() should only live for a single request.
+		$_SESSION['_flash'][$key] = $value;
 	}
 
-	public static function unflush() {
-		unset($_SESSION['_flush']);
+	public static function unflash() {
+		unset($_SESSION['_flash']);
+	}
+
+	public static function flush() {
+		$_SESSION = [];
 	}
 
 	public static function destroy() {
 		// First clear out the super global $_SESSION
-		$_SESSION = [];
+		static::flush();
 	
 		// Destroy all data registered to a session in the server
 		session_destroy();
