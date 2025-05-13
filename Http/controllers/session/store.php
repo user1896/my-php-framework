@@ -17,19 +17,24 @@ $form = LoginForm::validate($attributes = [
 
 // If the form validated successfuly
 
-// Then continue to authenticate the user
+// then attempt to authenticate the user
+$signedIn = (new Authenticator)->attempt(
+	$attributes['email'], $attributes['password']
+);
 
-// now attempt to authenticate the user
-if((new Authenticator)->attempt($attributes['email'], $attributes['password'])) {
-	// If the user authenticated successfuly:
-	// then redirect them to the home page.
-	redirect('/');
+if(! $signedIn) {
+	// If the authentication failed then prepare an error message:
+	// we're flashing our errors using Session::flash() in index.php after we throw an exception
+	// so here we must manualy throw the exception for this error to be caught in index.php, flashed, and redirect
+	// back to the previos page.
+	$form->error(
+		'password', 'No matching account found for that email address and password'
+	)->throw();
 }
 
-// If the authentication failed then prepare an error message:
-$form->error('password', 'No matching account found for that email address and password');
+// If we reach this line then the user authenticated successfuly. Redirect them to the home page:
+redirect('/');
 
-redirect('/login');
 // //////////////////////
 
 // I refactored the functions login() and logout() into the class Authenticator

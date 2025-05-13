@@ -37,15 +37,14 @@ class LoginForm {
 		$instance = new static($attributes);
 		// here we create a new instance we called it "$instance", and sent $attributes to the contructor.
 
-		// Now if a validation fails we throw an exception
-		
-		if($instance->failed()) {
-			// we throw the error message and the old attributes with it:
-			ValidationException::throw($instance->errors(), $instance->attributes);
-		}
+		// If a validation fails we throw an exception
+		// else the form is valid, we return the instance, so we can chain and call other methods on this object:
+		return $instance->failed() ? $instance->throw() : $instance;
+	}
 
-		// If the form is valid we return the instance so when can chain and call other methods on this object:
-		return $instance;
+	public function throw() {
+		// we throw the error message and the old attributes with it:
+		ValidationException::throw($this->errors(), $this->attributes);
 	}
 
 	public function failed() {
@@ -59,5 +58,13 @@ class LoginForm {
 
 	public function error($field, $message) {
 		$this->errors[$field] = $message;
+
+		return $this;
+		// We return the instance so we can chain the methods directly after we add an error.
+		// ex: a high chance we want to throw an exception after we add an error
+		// so why do:
+		// $form->error('password', 'error msg');
+		// $form->throw();
+		// When we can do: $form->error('password', 'error msg')->throw();
 	}
 }
