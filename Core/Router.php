@@ -64,6 +64,10 @@ class Router {
 		$this->abort();
 	}
 
+	public function previousUrl() {
+		return $_SERVER['HTTP_REFERER'];
+	}
+
 	// we don't want this method to be called, unless we call it when we route, so we make it protected.
 	protected function abort($code = 404) {
 		http_response_code($code);

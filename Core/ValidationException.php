@@ -30,5 +30,7 @@ class ValidationException extends Exception {
 
 		// throw the instance:
 		throw $instance;
+		// Notice that this is a "throw" and not a "return" so it will get catched in the
+		// "catch (ValidationException $e) {}" block.
 	}
 }
