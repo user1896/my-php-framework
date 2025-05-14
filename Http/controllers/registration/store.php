@@ -1,7 +1,6 @@
 <?php
 
-use Core\Database;
-use Core\App;
+use Core\Authenticator;
 use Http\Forms\LoginForm;
 
 // Valiadte the forms' inputs.
@@ -11,31 +10,20 @@ $form = LoginForm::validate($attributes = [
 	'password' => $_POST['password']
 ]);
 
-$db = App::resolve(Database::class);
+// If the form validated successfuly
 
-// Check if the account already exists.
-$user = $db->query('select * from users where email = :email', [
-	'email' => $email
-])->find();
+// then attempt to authenticate the user
 
-// If yes, then redirect them to the login page.
-if($user) {
-	header('location: /login');
-	exit();
-} else {
-	// If it doesn't exist, save it to the database, then log the use in, and redirect.
-	$db->query('INSERT INTO users(email, password) VALUES(:email, :password)', [
-		'email' => $email,
-		'password' => password_hash($password, PASSWORD_BCRYPT)
-	]);
+$registered = (new Authenticator)->attemptRegister(
+	$attributes['email'], $attributes['password']
+);
+
+// If we couldn't register the user it means his email already exists
+if(! $registered) {
+	redirect('/login');
 }
+// If yes, then redirect them to the login page.
 
-// Mark that the user has loged in, use sessions.
-// ERROR BELOW
-// login([
-// 	'email' => $email
-// ]);
-
+// If we reach this line then the user registered successfuly.
 // redirect
-header('location: /');
-exit();
+redirect('/');
