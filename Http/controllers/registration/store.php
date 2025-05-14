@@ -4,21 +4,12 @@ use Core\Database;
 use Core\App;
 use Http\Forms\LoginForm;
 
-$email = $_POST['email'];
-$password = $_POST['password'];
-
 // Valiadte the forms' inputs.
 
-$form = new LoginForm();
-
-// If there are validation errors:
-if(! $form->validate($email, $password) ) {
-	// then we display the errors in 'create.view.php'
-	return view('registration/create.view.php', [ // we return it so we don't execute the rest of the code if there're errors
-		'title' => 'Create New User',
-		'errors' => $form->errors(),
-	]);
-}
+$form = LoginForm::validate($attributes = [
+	'email' => $_POST['email'],
+	'password' => $_POST['password']
+]);
 
 $db = App::resolve(Database::class);
 
@@ -40,9 +31,10 @@ if($user) {
 }
 
 // Mark that the user has loged in, use sessions.
-login([
-	'email' => $email
-]);
+// ERROR BELOW
+// login([
+// 	'email' => $email
+// ]);
 
 // redirect
 header('location: /');

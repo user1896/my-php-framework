@@ -8,7 +8,15 @@
 	</p>
 	<form action="register" method="POST">
 		<label for="email">Email address</label>
-		<input id="email" name="email" type="email" autocomplete="email" placeholder="Email Address" required>
+		<input
+			id="email"
+			name="email"
+			type="email"
+			autocomplete="email"
+			placeholder="Email Address"
+			value="<?= old('email') ?>"
+			required
+		/>
 
 		<!-- display email error -->
 		<div>
