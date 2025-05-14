@@ -22,5 +22,4 @@ $db->query('delete from notes where id = :id', [
 ]);
 
 // After we delete the note, we redirect to the page that shows all the notes:
-header('location: /notes');
-exit();
+redirect('/notes');

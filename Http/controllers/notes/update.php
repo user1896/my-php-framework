@@ -41,5 +41,4 @@ $db->query('update notes set body = :body where id = :id', [
 ]);
 
 // redirect the user
-header("location: /note?id=$_POST[id]");
-die();
+redirect("/note?id=$_POST[id]");
