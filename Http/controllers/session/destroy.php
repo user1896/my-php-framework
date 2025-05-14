@@ -1,7 +1,10 @@
 <?php
 
 // log the user out
-logout();
+
+use Core\Authenticator;
+
+Authenticator::logout();
 
 // Redirect the user to the home page
 redirect('/');

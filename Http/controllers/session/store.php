@@ -34,5 +34,3 @@ if(! $signedIn) {
 
 // If we reach this line then the user authenticated successfuly. Redirect them to the home page:
 redirect('/');
-
-// I refactored the functions login() and logout() into the class Authenticator
