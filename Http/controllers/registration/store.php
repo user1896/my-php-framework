@@ -1,6 +1,7 @@
 <?php
 
 use Core\Authenticator;
+use Core\Session;
 use Http\Forms\LoginForm;
 
 // Valiadte the forms' inputs.
@@ -27,4 +28,5 @@ if(! $registered) {
 
 // If we reach this line then the user registered successfuly.
 // redirect them to the login page.
+Session::flash('afterRegistration', true);
 redirect('/login');

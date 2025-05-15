@@ -4,7 +4,11 @@
 
 <div>
 	<p>
-		Login big boy
+		<?php if(isset($afterRegistration)) : ?>
+			Account Registered seccussfully, log in:
+		<?php else : ?>
+			Log in
+		<?php endif; ?>
 	</p>
 	<form action="session" method="POST">
 		<label for="email">Email address</label>
