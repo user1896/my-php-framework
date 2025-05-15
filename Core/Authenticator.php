@@ -24,7 +24,8 @@ class Authenticator {
 			if(password_verify($password, $this->user['password'])){
 				// If the password is correct, then log them in using sessions.
 				$this->login([
-					'email' => $email
+					'id' => $this->user['id'],
+					'email' => $email // $this->user['email'] is also correct.
 				]);
 			
 				// user found and password correct, so authentication attempt is successful
@@ -50,15 +51,10 @@ class Authenticator {
 		}
 
 		// If we reach this point, it means we didn't find a user.
-		// Save it to the database, then log the use in.
+		// Save it to the database.
 		$this->db->query('INSERT INTO users(email, password) VALUES(:email, :password)', [
 			'email' => $email,
 			'password' => password_hash($password, PASSWORD_BCRYPT)
-		]);
-
-		// log them in
-		$this->login([
-			'email' => $email
 		]);
 
 		// registered successfully
@@ -73,8 +69,10 @@ class Authenticator {
 
 	public function login($user) {
 		$_SESSION['user'] = [
+			'id' => $user['id'],
 			'email' => $user['email']
 		];
+		// mydebug("I logged in, user[id] = $user[id]");
 	
 		// it is recommended to regenerate the session_id everytime we login
 		session_regenerate_id(true);

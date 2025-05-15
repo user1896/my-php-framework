@@ -22,8 +22,7 @@ $registered = (new Authenticator)->attemptRegister(
 if(! $registered) {
 	redirect('/login');
 }
-// If yes, then redirect them to the login page.
 
 // If we reach this line then the user registered successfuly.
-// redirect
-redirect('/');
+// redirect them to the login page.
+redirect('/login');
