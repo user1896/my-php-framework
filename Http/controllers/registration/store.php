@@ -20,7 +20,9 @@ $registered = (new Authenticator)->attemptRegister(
 
 // If we couldn't register the user it means his email already exists
 if(! $registered) {
-	redirect('/login');
+	$form->error(
+		'email', 'This email address already exist.'
+	)->throw();
 }
 
 // If we reach this line then the user registered successfuly.
