@@ -2,13 +2,14 @@
 
 use Core\App;
 use Core\Database;
+use Core\Session;
 
 // We have binded the key 'Core\Database' to intiating a Database object, the method resolve() will return it.
 $db = App::resolve(Database::class);
 // className::class == a string path to the full namespace path to the class
 // so Core\Database::class == 'Core\Database'
 
-$currentUserId = 1;
+$currentUserId = Session::get('user')['id'];
 
 $note = $db->query('select * from notes where id = :id', [
 	'id' => $_POST['id']
