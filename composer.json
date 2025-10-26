@@ -1,0 +1,16 @@
+{
+    "name": "mmg/my-php-framework",
+    "authors": [
+        {
+            "name": "user1896",
+            "email": "abde.user15@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "Http\\": "Http/"
+        }
+    }
+}
